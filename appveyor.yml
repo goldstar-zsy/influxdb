@@ -6,7 +6,19 @@ branches:
   - master
 
 os: Windows Server 2012 R2
-
+nuget:
+  account_feed: true
+  project_feed: true
+build:
+  verbosity: minimal
+artifacts:
+ - path: c:\influxdb
+  name: influxdb
+deploy:
+ - provider: GitHub
+   auth_token:
+     secure: A2Si7Qm5+tU9UQaQNbeNfpvx+eV+WGmInd4aBnyv6+We0igKnnD8RgtXkRoP0onh
+   artifact: InfluxDB
 # Custom clone folder (variables are not expanded here).
 clone_folder: c:\gopath\src\github.com\influxdata\influxdb
 
