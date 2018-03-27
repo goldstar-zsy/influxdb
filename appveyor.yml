@@ -46,4 +46,4 @@ build_script:
  - go test -timeout 15m -v ./...
 
 # To disable deployment
-deploy: on
+#deploy: on
