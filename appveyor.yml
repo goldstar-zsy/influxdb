@@ -12,7 +12,7 @@ nuget:
 build:
   verbosity: minimal
 artifacts:
- - path: c:\influxdb
+ - path: .\artifacts
    name: influxdb
 deploy:
  - provider: GitHub
