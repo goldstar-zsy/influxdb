@@ -13,7 +13,7 @@ build:
   verbosity: minimal
 artifacts:
  - path: c:\influxdb
-  name: influxdb
+   name: influxdb
 deploy:
  - provider: GitHub
    auth_token:
