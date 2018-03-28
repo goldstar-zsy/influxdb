@@ -11,14 +11,14 @@ nuget:
   project_feed: true
 build:
   verbosity: minimal
-artifacts:
- - path: .\influxArtifacts
-   name: influxdb
-deploy:
- - provider: GitHub
-   auth_token:
-     secure: A2Si7Qm5+tU9UQaQNbeNfpvx+eV+WGmInd4aBnyv6+We0igKnnD8RgtXkRoP0onh
-   artifact: InfluxDB
+#artifacts:
+# - path: .\influxArtifacts
+#   name: influxdb
+#deploy:
+# - provider: GitHub
+#   auth_token:
+#     secure: A2Si7Qm5+tU9UQaQNbeNfpvx+eV+WGmInd4aBnyv6+We0igKnnD8RgtXkRoP0onh
+#   artifact: InfluxDB
 # Custom clone folder (variables are not expanded here).
 clone_folder: c:\gopath\src\github.com\influxdata\influxdb
 
@@ -44,6 +44,17 @@ install:
 build_script:
  - go get -t -v ./...
  - go test -timeout 15m -v ./...
+ - cd ./cmd/influxd
+ - go get github.com/kimor79/gollectd
+ - go get github.com/rakyll/statik/fs
+ - go get golang.org/x/crypto/bcrypt
+ - go install
+ 
+ after_build:
+  - 7z a influxdb.zip %GOPATH%\bin\*
+  - appveyor PushArtifact influxdb.zip
+
+
 
 # To disable deployment
 #deploy: on
