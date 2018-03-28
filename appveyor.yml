@@ -50,7 +50,7 @@ build_script:
  - go get golang.org/x/crypto/bcrypt
  - go install
  
- after_build:
+after_build:
   - 7z a influxdb.zip %GOPATH%\bin\*
   - appveyor PushArtifact influxdb.zip
 
