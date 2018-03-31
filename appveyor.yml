@@ -11,15 +11,15 @@ nuget:
   project_feed: true
 build:
   verbosity: minimal
-#artifacts:
-# - path: .\influxArtifacts
-#   name: influxdb
-#deploy:
-# - provider: GitHub
-#   auth_token:
-#     secure: A2Si7Qm5+tU9UQaQNbeNfpvx+eV+WGmInd4aBnyv6+We0igKnnD8RgtXkRoP0onh
-#   artifact: InfluxDB
-# Custom clone folder (variables are not expanded here).
+artifacts:
+ - path: .\influxArtifacts
+   name: influxdb
+deploy:
+ - provider: GitHub
+   auth_token:
+     secure: A2Si7Qm5+tU9UQaQNbeNfpvx+eV+WGmInd4aBnyv6+We0igKnnD8RgtXkRoP0onh
+   artifact: InfluxDB
+#Custom clone folder (variables are not expanded here).
 clone_folder: c:\gopath\src\github.com\influxdata\influxdb
 
 # Environment variables
@@ -29,6 +29,8 @@ environment:
 
 # Scripts that run after cloning repository
 install:
+ - rd /s /q influxArtifacts
+ - mkdir influxArtifacts
  - set PATH=%GOROOT%\bin;%GOPATH%\bin;%PATH%
  - rmdir c:\go /s /q
  - echo %PATH%
@@ -52,6 +54,7 @@ build_script:
  
 after_build:
   - 7z a influxdb.zip %GOPATH%\bin\*
+  - cp influxdb.zip C:\gopath\src\github.com\influxdata\influxdb\influxArtifacts
   - appveyor PushArtifact influxdb.zip
 
 
