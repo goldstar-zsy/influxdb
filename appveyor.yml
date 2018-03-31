@@ -29,13 +29,13 @@ environment:
 
 # Scripts that run after cloning repository
 install:
- - rd /s /q influxArtifacts
- - mkdir influxArtifacts
  - set PATH=%GOROOT%\bin;%GOPATH%\bin;%PATH%
  - rmdir c:\go /s /q
  - echo %PATH%
  - echo %GOPATH%
  - cd C:\gopath\src\github.com\influxdata\influxdb
+ - if exist influxArtifacts (rd /s /q influxArtifacts)
+ - mkdir influxArtifacts
  - go version
  - go env
  - go get github.com/golang/dep/cmd/dep
